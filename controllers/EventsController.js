@@ -2,13 +2,13 @@ const { db } = require('../firebase');
 
 class EventsController {
     
-    static async getEvents(req, res) {
+    static async getMyEvents(req, res) {
       try {
-        const collectionRef = db.collection('events');
-        const snapshot = await collectionRef.get();
+        const eventsRef = db.collection('events');
+        const myEvents = await eventsRef.where('members', 'array-contains', req.params.emailId).get();
         
         let documents = [];
-        snapshot.forEach(doc => {
+        myEvents.forEach(doc => {
           documents.push({ id: doc.id, ...doc.data() });
         });
         
