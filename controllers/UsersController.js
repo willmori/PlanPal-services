@@ -17,7 +17,6 @@ class UsersController {
     static async getUsernames(req, res) {
         try {
             const users = await UsersController.usersRef.get();
-            
             let documents = [];
             users.forEach(doc => {
             documents.push(doc.data().username);
@@ -33,7 +32,6 @@ class UsersController {
     static async getEmails(req, res) {
         try {
           const users = await UsersController.usersRef.get();
-          
           let documents = [];
           users.forEach(doc => {
             documents.push(doc.data().email);
